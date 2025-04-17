@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% block title %}Tentang Aplikasi{% endblock %}
+
+{% block content %}
+
+<div class="contact-form">
+    <h3>Prediksi Berdasarkan Data Cuaca & Lokasi</h3>
+    <div class="form-container">
+        <div class="form-left">
+            <!-- Semua input form -->
+            <form method="POST" action="{{ url_for('predict') }}">
+                <input type="text" name="Temperature" placeholder="Temperature" class="form-control" required>
+                <input type="text" name="Humidity" placeholder="Humidity" class="form-control" required>
+                <input type="text" name="Wind_Speed" placeholder="Wind Speed" class="form-control" required>
+                <input type="text" name="Precipitation" placeholder="Precipitation" class="form-control" required>
+        
+                <select name="Cloud_Cover" class="form-control" required>
+                    <option value="">-- Cloud Cover --</option>
+                    
+                    <option value="partly cloudy">Partly Cloudy</option>
+                    <option value="cloudy">Cloudy</option>
+                    <option value="clear">Clear</option>
+                    <option value="overcast">Overcast</option>
+                </select>
+        
+                <input type="text" name="Atmospheric_Pressure" placeholder="Atmospheric Pressure" class="form-control" required>
+                <input type="text" name="UV_Index" placeholder="UV Index" class="form-control" required>
+        
+                <select name="Season" class="form-control" required>
+                    <option value="">-- Season --</option>
+                    <option value="Winter">Winter</option>
+                    <option value="Spring">Spring</option>
+                    <option value="Summer">Summer</option>
+                    <option value="Autumn">Autumn</option>
+                </select>
+        
+                <input type="text" name="Visibility" placeholder="Visibility" class="form-control" required>
+        
+                <select name="Location" class="form-control" required>
+                    <option value="">-- Location --</option>
+                    <option value="inland">Inland</option>
+                    <option value="mountain">Mountain</option>
+                    <option value="coastal">Coastal</option>
+                </select>
+        
+                <button type="submit" class="btnContactSubmit">Predict</button>
+            </form>
+        </div>
+        <div class="form-right">
+            <h4>Hasil Prediksi :</h4>
+            {% if predict_text %}
+            <p class="prediction-result">{{ predict_text }}</p>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}
